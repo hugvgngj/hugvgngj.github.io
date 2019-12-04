@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>welcome</title>
+    <url>/2019/12/04/welcome%20to%20my%20blog/</url>
+    <content><![CDATA[<p>nothing to say</p>
+]]></content>
+      <tags>
+        <tag>copy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>welcome</title>
+    <url>/2019/12/04/welcome/</url>
+    <content><![CDATA[<p>nothing to say</p>
+]]></content>
+      <tags>
+        <tag>hello</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>my first successful blog</title>
+    <url>/2019/11/01/my-first-successful-blog/</url>
+    <content><![CDATA[<p>测试tags和categories是否正常</p>
+]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+  </entry>
+</search>
