@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>withimage</title>
+    <url>/2019/12/04/withimage/withimage/</url>
+    <content><![CDATA[<p>这是第一个有图的博文<br>图在这里：<br><img src="/.com//0.jpg" alt="义工招募"><br>让我们看看效果怎么样</p>
+]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+      <tags>
+        <tag>image</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>welcome</title>
     <url>/2019/12/04/welcome%20to%20my%20blog/</url>
     <content><![CDATA[<p>nothing to say</p>
