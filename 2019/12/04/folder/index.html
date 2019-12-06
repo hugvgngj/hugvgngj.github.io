@@ -14,6 +14,7 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 
 <script id="hexo-configurations">
@@ -28,7 +29,7 @@
     copycode: {"enable":true,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
+    fancybox: true,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
@@ -39,24 +40,24 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":true,"preload":true},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="nothing to say">
-<meta name="keywords" content="copy">
+  <meta name="keywords" content="image">
 <meta property="og:type" content="article">
-<meta property="og:title" content="welcome">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;welcome%20to%20my%20blog&#x2F;index.html">
+<meta property="og:title" content="folder">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;folder&#x2F;index.html">
 <meta property="og:site_name" content="KK&#39;s blog">
-<meta property="og:description" content="nothing to say">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-04T08:57:21.475Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;folder&#x2F;why.jpg">
+<meta property="og:updated_time" content="2019-12-05T03:19:31.038Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;folder&#x2F;why.jpg">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/04/welcome%20to%20my%20blog/">
+<link rel="canonical" href="http://yoursite.com/2019/12/04/folder/">
 
 
 <script id="page-configurations">
@@ -70,7 +71,7 @@
   };
 </script>
 
-  <title>welcome | KK's blog</title>
+  <title>folder | KK's blog</title>
   
 
 
@@ -151,12 +152,37 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -180,10 +206,12 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/welcome%20to%20my%20blog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/folder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
       <meta itemprop="image" content="/images/myhead.png">
+	</a>
       <meta itemprop="name" content="KK">
       <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
     </span>
@@ -193,7 +221,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          welcome
+          folder
         </h1>
 
         <div class="post-meta">
@@ -202,10 +230,36 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-04 16:56:29 / 修改时间：16:57:21" itemprop="dateCreated datePublished" datetime="2019-12-04T16:56:29+08:00">2019-12-04</time>
+              <time title="创建时间：2019-12-04 23:38:43" itemprop="dateCreated datePublished" datetime="2019-12-04T23:38:43+08:00">2019-12-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 11:19:31" itemprop="dateModified" datetime="2019-12-05T11:19:31+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>0 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
 
           
 
@@ -218,8 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>nothing to say</p>
-
+        <p><img src="/2019/12/04/folder/why.jpg" class title="examplename}&lt;&#x2F;p&gt;"></p>
     </div>
 
     
@@ -228,7 +281,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/copy/" rel="tag"># copy</a>
+              <a href="/tags/image/" rel="tag"># image</a>
           </div>
 
         
@@ -237,12 +290,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/04/welcome/" rel="prev" title="welcome">
-      <i class="fa fa-chevron-left"></i> welcome
+    <a href="/2019/12/04/test/withimage/" rel="prev" title="withimage">
+      <i class="fa fa-chevron-left"></i> withimage
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/12/04/withimage/withimage/" rel="next" title="withimage">
-      withimage <i class="fa fa-chevron-right"></i>
+    <a href="/2019/12/05/%E7%BD%91%E7%BB%9C%E5%8E%8B%E7%BC%A9/adversarial/" rel="next" title="网络压缩/adversarial">
+      网络压缩/adversarial <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -296,7 +349,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -358,6 +411,8 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -370,6 +425,8 @@
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 

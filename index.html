@@ -14,6 +14,7 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 
 <script id="hexo-configurations">
@@ -28,7 +29,7 @@
     copycode: {"enable":true,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
+    fancybox: true,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
@@ -39,7 +40,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":true,"preload":true},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
@@ -149,12 +150,37 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -178,10 +204,12 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/withimage/withimage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/folder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
       <meta itemprop="image" content="/images/myhead.png">
+	</a>
       <meta itemprop="name" content="KK">
       <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
     </span>
@@ -192,7 +220,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/04/withimage/withimage/" class="post-title-link" itemprop="url">withimage</a>
+            <a href="/2019/12/04/folder/" class="post-title-link" itemprop="url">folder</a>
         </h1>
 
         <div class="post-meta">
@@ -201,10 +229,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-04 23:25:55 / 修改时间：23:35:56" itemprop="dateCreated datePublished" datetime="2019-12-04T23:25:55+08:00">2019-12-04</time>
+              <time title="创建时间：2019-12-04 23:38:43" itemprop="dateCreated datePublished" datetime="2019-12-04T23:38:43+08:00">2019-12-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 11:19:31" itemprop="dateModified" datetime="2019-12-05T11:19:31+08:00">2019-12-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -216,6 +250,15 @@
                   </a>
                 </span>
             </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>0 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
 
           
 
@@ -228,126 +271,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这是第一个有图的博文<br>图在这里：<br><img src="/.com//0.jpg" alt="义工招募"><br>让我们看看效果怎么样</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/welcome%20to%20my%20blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myhead.png">
-      <meta itemprop="name" content="KK">
-      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KK's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/welcome%20to%20my%20blog/" class="post-title-link" itemprop="url">welcome</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-04 16:56:29 / 修改时间：16:57:21" itemprop="dateCreated datePublished" datetime="2019-12-04T16:56:29+08:00">2019-12-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>nothing to say</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/welcome/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myhead.png">
-      <meta itemprop="name" content="KK">
-      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KK's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/welcome/" class="post-title-link" itemprop="url">welcome</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-04 16:56:29 / 修改时间：16:57:06" itemprop="dateCreated datePublished" datetime="2019-12-04T16:56:29+08:00">2019-12-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>nothing to say</p>
-
+          <p><img src="/2019/12/04/folder/why.jpg" class title="examplename}&lt;&#x2F;p&gt;"></p>
       
     </div>
 
@@ -369,7 +293,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/my-first-successful-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
       <meta itemprop="image" content="/images/myhead.png">
+	</a>
       <meta itemprop="name" content="KK">
       <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
     </span>
@@ -381,6 +307,93 @@
         <h1 class="post-title" itemprop="name headline">
           
             <a href="/2019/11/01/my-first-successful-blog/" class="post-title-link" itemprop="url">my first successful blog</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-01 16:52:12" itemprop="dateCreated datePublished" datetime="2019-11-01T16:52:12+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 00:00:58" itemprop="dateModified" datetime="2019-12-05T00:00:58+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>8 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>测试tags和categories是否正常</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/test/my-first-successful-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/test/my-first-successful-blog/" class="post-title-link" itemprop="url">my first successful blog</a>
         </h1>
 
         <div class="post-meta">
@@ -410,6 +423,15 @@
                   </a>
                 </span>
             </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>8 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
 
           
 
@@ -423,6 +445,349 @@
 
       
           <p>测试tags和categories是否正常</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/test/welcome%20to%20my%20blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/test/welcome%20to%20my%20blog/" class="post-title-link" itemprop="url">welcome</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-04 16:56:29 / 修改时间：16:57:21" itemprop="dateCreated datePublished" datetime="2019-12-04T16:56:29+08:00">2019-12-04</time>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>3 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>nothing to say</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/test/welcome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/test/welcome/" class="post-title-link" itemprop="url">welcome</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-04 16:56:29 / 修改时间：16:57:06" itemprop="dateCreated datePublished" datetime="2019-12-04T16:56:29+08:00">2019-12-04</time>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>3 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>nothing to say</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/test/withimage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/test/withimage/" class="post-title-link" itemprop="url">withimage</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 23:25:55" itemprop="dateCreated datePublished" datetime="2019-12-04T23:25:55+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 10:48:52" itemprop="dateModified" datetime="2019-12-05T10:48:52+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>24 字</span>
+			&nbsp; | &nbsp;
+			<span>1 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这是第一个有图的博文<br>图在这里：<br><img src="/2019/12/04/test/withimage/a.jpg" alt="义工招募"><br>让我们看看效果怎么样</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/%E7%BD%91%E7%BB%9C%E5%8E%8B%E7%BC%A9/adversarial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/05/%E7%BD%91%E7%BB%9C%E5%8E%8B%E7%BC%A9/adversarial/" class="post-title-link" itemprop="url">网络压缩/adversarial</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-05 22:00:08" itemprop="dateCreated datePublished" datetime="2019-12-05T22:00:08+08:00">2019-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-06 10:49:43" itemprop="dateModified" datetime="2019-12-06T10:49:43+08:00">2019-12-06</time>
+              </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>595 字</span>
+			&nbsp; | &nbsp;
+			<span>2 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="论文名称"><a href="#论文名称" class="headerlink" title="论文名称"></a>论文名称</h3><p><a href="https://arxiv.org/pdf/1810.00208.pdf" target="_blank" rel="noopener">To Compress or Not to Compress: Understanding the Interactions between Adversarial Attacks and Neural Network Compression</a></p>
+<h3 id="论文重述"><a href="#论文重述" class="headerlink" title="论文重述"></a>论文重述</h3><p>该论文主要是讨论对抗攻击在压缩模型上的可迁移性 (Transferability)，分为三种情形：</p>
+<ul>
+<li>compressed 产生对抗样本测试自身</li>
+<li>baseline 产生对抗样本测试 compressed</li>
+<li>compressed 产生对抗样本测试 baseline<br>比较的压缩方式为：剪枝 和 量化<br>比较的攻击方法为：IFGSM, IFGM, Deepfool</li>
+</ul>
+<h3 id="比较结果"><a href="#比较结果" class="headerlink" title="比较结果"></a>比较结果</h3><ul>
+<li><p>剪枝方法</p>
+<ol>
+<li><p>对于 IFGM 和 IFGSM 方法，对抗样本的迁移性是受到剪枝过后密度减小造成影响的。具体表现在：</p>
+<ul>
+<li>当密度小的时候，用compressed生成的对抗样本去攻击baseline的效果不错，从小到大迁移性好</li>
+<li>当密度小的时候，用baseline生成的对抗样本去攻击compressed效果不好，从大到小迁移性不好</li>
+</ul>
+</li>
+<li><p>对于 Deepfool 方法，小的生成样本攻击自身，小的生成样本攻击大的，这两种情况在密度减小的时候迁移性都更好。</p>
+</li>
+<li><p>因为clipped的原因，对于有clipped的方法（IFGSM and IFGM），小的生成样本攻击自身，大的生成样本攻击小的，这两种情况在密度减小的时候迁移性都更不好。</p>
+</li>
+</ol>
+</li>
+<li><p>量化方法</p>
+<ol>
+<li><p>当量化精度高的时候，在量化与不量化之间的攻击效果不受影响</p>
+</li>
+<li><p>当小数位数减小的很厉害时类似fine-grained pruning（剪枝权重）的效果</p>
+</li>
+<li><p>整数位数很少的时候，小的产生样本攻击大的会变得异常困难，表明类别的语义信息保存在activations and weights中</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong><em>（以下仅表示个人观点，欢迎讨论指正）</em></strong></p>
+<p>就像看了一份实验报告一样，没有新方法，主要是比较结果。</p>
+<p>个人感觉方法分的太细了，特别是攻击方法，感觉 ①没有从攻击原理的角度阐释可迁移性，②只是众多攻击模型中的典型三种，且IFGSM，IFGM和Deepfool的区别还挺大的，感觉又只像两类攻击方法。总之感觉脱离数学原理的比较都显得不那么全面。</p>
+<p>亮点：</p>
+<ul>
+<li>use Mayo tool to generate pruned and quantised models</li>
+<li>对于应用的讨论，作者最终的结论是公司用压缩模型发行并不会增加大模型的安全性</li>
+</ul>
 
       
     </div>
@@ -485,7 +850,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -547,6 +912,8 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -559,6 +926,8 @@
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 
