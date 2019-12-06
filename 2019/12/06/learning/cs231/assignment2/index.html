@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/battery180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bettery32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/battery16.png">
+  <link rel="mask-icon" href="/images/battery.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="assignment 2 FullyConnectedNet.ipynb  affine_forward  .sizenumber=X.size  # 计算 X 中所有元素的个数X_row=np.size(X,0)  #计算 X 一行元素的个数X_col=np.size(X,1)  #计算 X 一列元素的个数   .shapeX_dim=X.shape  # 以元组形式，返回数组的维数print(">
+<meta name="keywords" content="学习笔记,cs231">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Assignment 2">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;learning&#x2F;cs231&#x2F;assignment2&#x2F;index.html">
+<meta property="og:site_name" content="KK&#39;s blog">
+<meta property="og:description" content="assignment 2 FullyConnectedNet.ipynb  affine_forward  .sizenumber=X.size  # 计算 X 中所有元素的个数X_row=np.size(X,0)  #计算 X 一行元素的个数X_col=np.size(X,1)  #计算 X 一列元素的个数   .shapeX_dim=X.shape  # 以元组形式，返回数组的维数print(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-06T03:08:57.453Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/06/learning/cs231/assignment2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Assignment 2 | KK's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KK's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">武汉某大学生</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">14</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/hugvgngj" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/learning/cs231/assignment2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Assignment 2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-06 10:50:43 / 修改时间：11:08:57" itemprop="dateCreated datePublished" datetime="2019-12-06T10:50:43+08:00">2019-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/" itemprop="url" rel="index">
+                    <span itemprop="name">learning</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>624 字</span>
+			&nbsp; | &nbsp;
+			<span>3 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="assignment-2"><a href="#assignment-2" class="headerlink" title="assignment 2"></a>assignment 2</h3><ul>
+<li><p><strong>FullyConnectedNet.ipynb</strong></p>
+<ul>
+<li><p>affine_forward</p>
+<blockquote>
+<p><strong><em>.size</em></strong><br>number=X.size  <em># 计算 X 中所有元素的个数</em><br>X_row=np.size(X,0)  <em>#计算 X 一行元素的个数</em><br>X_col=np.size(X,1)  <em>#计算 X 一列元素的个数</em></p>
+</blockquote>
+<blockquote>
+<p><strong><em>.shape</em></strong><br>X_dim=X.shape  <em># 以元组形式，返回数组的维数</em><br>print(X.shape[0])  <em># 输出行的个数</em><br>print(X.shape[1])  <em>#输出列的个数</em></p>
+</blockquote>
+<blockquote>
+<p><strong><em>len</em></strong><br>length=len(X)  #返回对象的长度   不是元素的个数  </p>
+</blockquote>
+</li>
+<li><p>affine_backward<br>$ dx = dout * w^T $<br>$ dw = x^T * dout $<br>$ db = [1,…,1] * dout $</p>
+</li>
+<li><p>relu_forward<br>$ out = maximum(0, x) $</p>
+</li>
+<li><p>relu_backward</p>
+<ul>
+<li>sigmoid: $g’(z) = a * (1-a) $</li>
+<li>tanh: $ g’(z) = 1 - a^2 $</li>
+<li>relu:     $$g’(z) = \begin{cases}<br>0 &amp; z&lt;0 \<br>1 &amp; z≥0<br>\end{cases}$$</li>
+<li>leaky relu: $$g’(z) = \begin{cases}</li>
+</ul>
+<p>0.01 &amp; z&lt;0 \<br>1 &amp; z≥0<br>\end{cases}$$</p>
+<p>$ dx = dout * g’(z) $</p>
+</li>
+<li><p>class TwoLayerNet<br>【affine - relu - affine - softmax】</p>
+<ul>
+<li><p>init</p>
+<ul>
+<li>一组<strong>高斯分布</strong>的数据：<strong><em>np.random.randn</em></strong><br>Gaussian centered at 0.0 with standard deviation equal to weight_scale<br><code>np.random.randn(input_dim, hidden_dim) * weight_scale</code></li>
+<li>添加元素到字典<br><code>self.params{&#39;W1&#39;} =</code><br>初始化<br><code>self.params = {}</code></li>
+</ul>
+</li>
+<li><p>loss</p>
+<p>$$ return = \begin{cases}<br>y is None =&gt; scores \<br>y is not None =&gt; \begin{cases}  loss \ grads \end{cases}<br>\end{cases}$$</p>
+<p>调用了之前的affine_blablabla，还有softmax_loss</p>
+</li>
+</ul>
+</li>
+<li><p>class Solver</p>
+<pre><code>To train a model, you will first construct a Solver instance, passing the **model**, **dataset**, and **various options** (learning rate, batch size, etc) to the constructor. 
+You will then call the train() method to run the optimization procedure and train the model. After the train() method returns, **model.params** will contain the parametersthat performed best on the validation set over the course of training. In addition, the instance variable **solver.loss_history** will contain a list of all losses encountered during training and the instance variables **solver.train_acc_history** and **solver.val_acc_histor** will be lists of the accuracies of the model on the training and validation set at each epoch.
+Example usage might look something like this:</code></pre>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> data = &#123;</span><br><span class="line"> 	<span class="string">'X_train'</span>: <span class="comment"># training data</span></span><br><span class="line"> 	<span class="string">'y_train'</span>: <span class="comment"># training labels</span></span><br><span class="line"> 	<span class="string">'X_val'</span>: <span class="comment"># validation data</span></span><br><span class="line"> 	<span class="string">'y_val'</span>: <span class="comment"># validation labels</span></span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> model = MyAwesomeModel(hidden_size=<span class="number">100</span>, reg=<span class="number">10</span>)</span><br><span class="line"> </span><br><span class="line"> solver = Solver(model, data,</span><br><span class="line">                 update_rule=<span class="string">'sgd'</span>,</span><br><span class="line">                 optim_config=&#123;</span><br><span class="line">                   <span class="string">'learning_rate'</span>: <span class="number">1e-3</span>,</span><br><span class="line">                 &#125;,</span><br><span class="line">                 lr_decay=<span class="number">0.95</span>,</span><br><span class="line">                 num_epochs=<span class="number">10</span>, batch_size=<span class="number">100</span>,</span><br><span class="line">                 print_every=<span class="number">100</span>)</span><br><span class="line"> </span><br><span class="line">solver.train()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>FullyConnectedNet</p>
+<pre><code>- 通过 **weight_scale** 调整权重初始化的范围
+- 多层网络参数设置（for循环）
+  `self.params[&apos;W&apos; + str(i + 2)]`
+- forward
+  `for i in range(self.num_layers):`
+  backward
+  `for i in range(self.num_layers, 0, -1):`</code></pre><ul>
+<li><p>optim.py<br>Each update rule has the same interface:<br><code>def update(w, dw, config=None):</code></p>
+<ul>
+<li>SGD+momuntum<br>$v = momentum * v -learning_{rate} * dw$<br>$w_{next} = w+v$</li>
+<li>RMSProp<br>$ cache = decay_{rate} * cache + (1-decay_{rate}) * dw * dw$<br>$ w_{next} = w - \frac{learning_{rate} * dw}{\sqrt{cache + \epsilon}} $ </li>
+<li>Adam<br>$ t = t + 1 $<br>$ m = \beta_1 * m + (1-\beta_1) * dw $         <strong>first momentum</strong><br>$ v = \beta_2 * v + (1-\beta_2) * dw * dw $        <strong>second momentum</strong><br>$ \widehat{m} = \frac{m}{1 - \beta_1^t} $         <strong>bias correction</strong><br>$ \widehat{v} = \frac{v}{1 - \beta_2^t} $            <strong>bias correction</strong><br>$ w_{next} = w - \frac{learning_{rate} * \widehat{m}}{\sqrt{\widehat{v} + \epsilon}} $</li>
+</ul>
+</li>
+<li><p>Train the best model</p>
+<ul>
+<li><strong>FullyConnectedNet</strong> 的参数：<br>[100, 100, 100, 100, 100], weight_scale=5e-2, reg = reg</li>
+<li><strong>Solver</strong> 的参数：<br>model, data, num_epochs=10, batch_size=200, update_rule=’rmsprop’,<br>optim_config={<pre><code>&apos;learning_rate&apos;: learning_rate</code></pre>}, verbose=False</li>
+<li><strong>learnin_rate</strong> 可行值：<br>[1e-3, 1e-4]</li>
+<li><strong>reg</strong> 可行值：<br>[1e-2, 1e-3, 1e-4]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>BatchNormalization.ipynb</strong></p>
+</li>
+<li><p><strong>Dropout.ipynb</strong></p>
+</li>
+<li><p><strong>ConvolutionalNetworks.ipynb</strong></p>
+</li>
+<li><p><strong>Tensorflow.ipynb</strong></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/cs231/" rel="tag"># cs231</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/04/test/withimage/" rel="prev" title="withimage">
+      <i class="fa fa-chevron-left"></i> withimage
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/06/learning/cs231/assignment1/" rel="next" title="Assignment 1">
+      Assignment 1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#assignment-2"><span class="nav-number">1.</span> <span class="nav-text">assignment 2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KK"
+      src="/images/myhead.png">
+  <p class="site-author-name" itemprop="name">KK</p>
+  <div class="site-description" itemprop="description">第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KK</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

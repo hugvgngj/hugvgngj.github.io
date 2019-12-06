@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/battery180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bettery32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/battery16.png">
+  <link rel="mask-icon" href="/images/battery.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="数据结构绪论 基本概念和术语数据：整型实数型，声音图像…数据元素：畜类的数据元素是牛羊狗猫…数据项：数据元素牛的数据项是眼耳鼻喉…或者姓名年龄性别…最小不可分割数据对象：数据的子集，性质相同的数据元素的集合数据—-&amp;gt;数据元素—-&amp;gt;数据项抽象数据类型（ADT）：模型和模型操作 123456ADT	抽象数据类型名DATA	定义数据元素OPERATION	操作endADT  逻辑结构：集合，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learning&#x2F;大话数据结构">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;learning&#x2F;%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;index.html">
+<meta property="og:site_name" content="KK&#39;s blog">
+<meta property="og:description" content="数据结构绪论 基本概念和术语数据：整型实数型，声音图像…数据元素：畜类的数据元素是牛羊狗猫…数据项：数据元素牛的数据项是眼耳鼻喉…或者姓名年龄性别…最小不可分割数据对象：数据的子集，性质相同的数据元素的集合数据—-&amp;gt;数据元素—-&amp;gt;数据项抽象数据类型（ADT）：模型和模型操作 123456ADT	抽象数据类型名DATA	定义数据元素OPERATION	操作endADT  逻辑结构：集合，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-21T14:51:57.128Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/06/learning/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>learning/大话数据结构 | KK's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KK's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">武汉某大学生</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">14</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/hugvgngj" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/learning/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          learning/大话数据结构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-06 11:00:41" itemprop="dateCreated datePublished" datetime="2019-12-06T11:00:41+08:00">2019-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-21 22:51:57" itemprop="dateModified" datetime="2019-08-21T22:51:57+08:00">2019-08-21</time>
+              </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>537 字</span>
+			&nbsp; | &nbsp;
+			<span>2 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="数据结构绪论"><a href="#数据结构绪论" class="headerlink" title="数据结构绪论"></a>数据结构绪论</h3><ul>
+<li><p>基本概念和术语<br><strong>数据</strong>：整型实数型，声音图像…<br><strong>数据元素</strong>：畜类的数据元素是牛羊狗猫…<br><strong>数据项</strong>：数据元素牛的数据项是眼耳鼻喉…或者姓名年龄性别…最小不可分割<br><strong>数据对象</strong>：数据的子集，性质相同的数据元素的集合<br>数据—-&gt;数据元素—-&gt;数据项<br><strong>抽象数据类型</strong>（<strong>ADT</strong>）：模型和模型操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ADT	抽象数据类型名</span><br><span class="line">DATA</span><br><span class="line">	定义数据元素</span><br><span class="line">OPERATION</span><br><span class="line">	操作</span><br><span class="line">endADT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>逻辑结构</strong>：集合，线性，树形 ，图形</p>
+</li>
+<li><p><strong>物理结构</strong>：顺序存储，链式存储</p>
+</li>
+</ul>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
+<li><p>函数的渐进增长</p>
+<ol>
+<li>忽略加法常数</li>
+<li>与最高次项相乘的常数并不重要</li>
+<li>更应该关注主项（最高阶项）的阶数</li>
+<li>某个算法，随着n的增大，它会越来越优于另一个算法，或者越来越差于另一个算法</li>
+</ol>
+</li>
+<li><p>时间复杂度</p>
+<ol>
+<li><p>用常数1取代运行时间中的所有加法常数</p>
+</li>
+<li><p>在修改后的运行次数函数中，只保留最高阶项</p>
+</li>
+<li><p>如果最高阶项存在且不是1，则去除与这个项相乘的常数</p>
+<p>得到的结果就是大O阶</p>
+</li>
+</ol>
+<ul>
+<li><p>不管常数是多少，都记作O(1)</p>
+</li>
+<li><p>关键分析循环结构</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th align="center">执行次数函数</th>
+<th align="center">阶</th>
+<th align="center">非正式术语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">12</td>
+<td align="center">O(1)</td>
+<td align="center">常数项</td>
+</tr>
+<tr>
+<td align="center">2n+3</td>
+<td align="center">O(n)</td>
+<td align="center">线性阶</td>
+</tr>
+<tr>
+<td align="center">$3n^2+2n+1$</td>
+<td align="center">O($n^2$)</td>
+<td align="center">平方阶</td>
+</tr>
+<tr>
+<td align="center">$5log2(n)+20$</td>
+<td align="center">O($logn$)</td>
+<td align="center">对数阶</td>
+</tr>
+<tr>
+<td align="center">………………</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>耗费时间<br>$O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)$</p>
+</li>
+<li><p>通常提到的运行时间都是最坏情况的运行时间</p>
+</li>
+</ul>
+</li>
+<li><p>空间复杂度<br>$S(n) = O(f(n))$</p>
+<ul>
+<li>n为问题的规模，f(n)为语句关于n所占存储空间的函数</li>
+</ul>
+</li>
+</ul>
+<h3 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h3><p>​    线性表(List)：零个或多个数据元素的有限序列</p>
+<ul>
+<li><p>顺序存储结构</p>
+<ul>
+<li><p>三个属性：存储起始位置<strong>data</strong>，最大存储容量<strong>MaxSize</strong>，线性表当前长度<strong>length</strong></p>
+</li>
+<li><pre><code class="C">GetElem(SqList L, <span class="keyword">int</span> i, ElemType *e){
+
+}
+&lt;!--￼<span class="number">1</span>--&gt;</code></pre>
+</li>
+</ul>
+</li>
+<li><h2 id="链式存储结构之单链表"><a href="#链式存储结构之单链表" class="headerlink" title="链式存储结构之单链表"></a>链式存储结构之单链表</h2></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/06/learning/pytorch/60_minute_blitz/" rel="prev" title="learning/pytorch/60_minute_blitz">
+      <i class="fa fa-chevron-left"></i> learning/pytorch/60_minute_blitz
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/06/learning/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="learning/服务器">
+      learning/服务器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构绪论"><span class="nav-number">1.</span> <span class="nav-text">数据结构绪论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">2.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性表"><span class="nav-number">3.</span> <span class="nav-text">线性表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链式存储结构之单链表"><span class="nav-number"></span> <span class="nav-text">链式存储结构之单链表</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KK"
+      src="/images/myhead.png">
+  <p class="site-author-name" itemprop="name">KK</p>
+  <div class="site-description" itemprop="description">第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KK</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/battery180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bettery32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/battery16.png">
+  <link rel="mask-icon" href="/images/battery.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="笔记 创建新的虚拟环境时需要在navigator重装jupyter cannot import name &amp;#39;imread&amp;#39; from &amp;#39;scipy.misc&amp;#39;  要把scipy降级到1.2.1 pip3 install scipy==1.2.1  cs231 assignmentsassignment 1knn compute L2 distance可直接调用范式函">
+<meta name="keywords" content="学习笔记,cs231">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Assignment 1">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;learning&#x2F;cs231&#x2F;assignment1&#x2F;index.html">
+<meta property="og:site_name" content="KK&#39;s blog">
+<meta property="og:description" content="笔记 创建新的虚拟环境时需要在navigator重装jupyter cannot import name &amp;#39;imread&amp;#39; from &amp;#39;scipy.misc&amp;#39;  要把scipy降级到1.2.1 pip3 install scipy==1.2.1  cs231 assignmentsassignment 1knn compute L2 distance可直接调用范式函">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;2233157-b77105789e36c847.jpg">
+<meta property="og:updated_time" content="2019-12-06T03:10:38.659Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;2233157-b77105789e36c847.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/06/learning/cs231/assignment1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Assignment 1 | KK's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KK's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">武汉某大学生</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">14</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/hugvgngj" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/learning/cs231/assignment1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<a href="/">
+      <meta itemprop="image" content="/images/myhead.png">
+	</a>
+      <meta itemprop="name" content="KK">
+      <meta itemprop="description" content="第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KK's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Assignment 1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-06 10:50:43 / 修改时间：11:10:38" itemprop="dateCreated datePublished" datetime="2019-12-06T10:50:43+08:00">2019-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/" itemprop="url" rel="index">
+                    <span itemprop="name">learning</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+            </span>
+		  
+		  
+			<span class="post-letters-count">
+			&nbsp; | &nbsp;
+			<span>1.5k 字</span>
+			&nbsp; | &nbsp;
+			<span>7 min</span>
+			</span>
+		  
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><ol>
+<li>创建新的虚拟环境时需要<em>在navigator</em>重装jupyter</li>
+<li><code>cannot import name &#39;imread&#39; from &#39;scipy.misc&#39;</code>  要把scipy降级到1.2.1 <code>pip3 install scipy==1.2.1</code></li>
+</ol>
+<h3 id="cs231-assignments"><a href="#cs231-assignments" class="headerlink" title="cs231 assignments"></a>cs231 assignments</h3><h4 id="assignment-1"><a href="#assignment-1" class="headerlink" title="assignment 1"></a>assignment 1</h4><h5 id="knn"><a href="#knn" class="headerlink" title="knn"></a>knn</h5><ul>
+<li><p>compute L2 distance<br>可直接调用范式函数（缺省值为二范式）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x_norm=np.linalg.norm(x, ord=<span class="literal">None</span>, axis=<span class="literal">None</span>, keepdims=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>two loops</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dists[i][j] = np.sqrt(np.sum((X[i] - self.X_train[j]) ** <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>one loop</p>
+<blockquote>
+<p>np.sum broadcast机制:</p>
+<p>  当axis为0时,是压缩行,即将每一列的元素相加,将矩阵压缩为一行</p>
+<p>  当axis为1时,是压缩列,即将每一行的元素相加,将矩阵压缩为一列</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dists[i] = np.sqrt(np.sum((self.X_train - X[i]) ** <span class="number">2</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>no loop</p>
+<blockquote>
+<p>在Numpy中，</p>
+<p>  test$\times$train + 1$\times$train    矩阵的每一行与向量相加</p>
+<p>  test$\times$train + test$\times$1    矩阵的每一列与向量相加</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  dists += np.sum(self.X_train ** <span class="number">2</span>, axis=<span class="number">1</span>).reshape(<span class="number">1</span>, num_train)</span><br><span class="line">dists += np.sum(X ** <span class="number">2</span>, axis=<span class="number">1</span>).reshape(num_test, <span class="number">1</span>) <span class="comment"># reshape for broadcasting</span></span><br><span class="line">  dists -= <span class="number">2</span> * np.dot(X, self.X_train.T)</span><br><span class="line">  dists = np.sqrt(dists)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>predict the class</p>
+<ul>
+<li><p>find out k neighbors</p>
+<blockquote>
+<p><strong>np.argsort(a, axis=-1, kind=’quicksort’, order=None)</strong></p>
+<p>​    返回的是数组值从小到大的索引值 </p>
+<p>​    返回的是索引值所以可以直接作为数组的序号使用</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">closest_y = self.y_train[np.argsort(dists[i])[<span class="number">0</span>:k]]</span><br></pre></td></tr></table></figure></li>
+<li><p>decide the class</p>
+<blockquote>
+<p><strong><em>np.bincount</em>(x, weights=None, minlength=0)</strong></p>
+<p>​    bin的数量比x中的最大值大1（0-最大值），每个bin给出了它的索引值在x中出现的次数，还可以加权</p>
+<p>​    所以从中可以直接选出次数最多的类</p>
+<p><strong><em>np.argmax</em>(axis=None, out=None)</strong></p>
+<p>​    取出a中元素最大值所对应的<strong>索引值</strong>（索引值默认从0开始），所以经过bincount之后可以直接取出类</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_pred[i] = np.bincount(closest_y).argmax()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>cross validation</p>
+<ul>
+<li><p>split</p>
+<blockquote>
+<p><strong><em>np.array_split</em>(x,num)</strong><br>把x等分成num堆，最后一堆可能不对称</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X_train_folds = np.array_split(X_train,num_folds)</span><br><span class="line">  y_train_folds = np.array_split(y_train,num_folds)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>excert cross validation</p>
+<blockquote>
+<p><strong>y.shape[0]</strong><br>意思是：返回 y 中行的总数。 这个值在 y 是单特征的情况下 和 len(y) 是等价的 。即数据集中数据点的总数。</p>
+</blockquote>
+<blockquote>
+<p><strong><em>np.vstack</em>(tup)</strong></p>
+<p>​    在竖直方向上堆叠，等价于：np.concatenate(tup, axis=1)</p>
+<p><strong>np.hstack*(tup)</strong></p>
+<p>​    在水平方向上平铺，等价于：np.concatenate(tup, axis=0)</p>
+<p>tup:sequence of arrays，有维度要求</p>
+</blockquote>
+<p>注意X_train是矩阵，所以用vstack堆叠<br>  而y_train是向量，所以用hstack堆叠</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> k_choices:</span><br><span class="line">  accuracies = []</span><br><span class="line">  <span class="keyword">print</span> k</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(num_folds):</span><br><span class="line">      X_train_cv = np.vstack(X_train_folds[<span class="number">0</span>:i] + X_train_folds[i+<span class="number">1</span>:])</span><br><span class="line">      y_train_cv = np.hstack(y_train_folds[<span class="number">0</span>:i] + y_train_folds[i+<span class="number">1</span>:])</span><br><span class="line">      X_valid_cv = X_train_folds[i]</span><br><span class="line">      y_valid_cv = y_train_folds[i]</span><br><span class="line">    </span><br><span class="line">      classifier.train(X_train_cv, y_train_cv)</span><br><span class="line">      dists = classifier.compute_distances_no_loops(X_valid_cv)</span><br><span class="line">      accuracy = float(np.sum(classifier.predict_labels(dists, k) == y_valid_cv)) / y_valid_cv.shape[<span class="number">0</span>]</span><br><span class="line">      accuracies.append(accuracy)</span><br><span class="line">  k_to_accuracies[k] = accuracies</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<ul>
+<li><p>区分三种数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Split the data into train, val, and test sets. In addition we will</span></span><br><span class="line"><span class="comment"># create a small development set as a subset of the training data;</span></span><br><span class="line"><span class="comment"># we can use this for development so our code runs faster.</span></span><br><span class="line">num_training = <span class="number">49000</span></span><br><span class="line">num_validation = <span class="number">1000</span></span><br><span class="line">num_test = <span class="number">1000</span></span><br><span class="line">num_dev = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Our validation set will be num_validation points from the original</span></span><br><span class="line"><span class="comment"># training set.</span></span><br><span class="line">mask = range(num_training, num_training + num_validation)</span><br><span class="line">X_val = X_train[mask]</span><br><span class="line">y_val = y_train[mask]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Our training set will be the first num_train points from the original</span></span><br><span class="line"><span class="comment"># training set.</span></span><br><span class="line">mask = range(num_training)</span><br><span class="line">X_train = X_train[mask]</span><br><span class="line">y_train = y_train[mask]</span><br><span class="line"></span><br><span class="line"><span class="comment"># We will also make a development set, which is a small subset of</span></span><br><span class="line"><span class="comment"># the training set.</span></span><br><span class="line">mask = np.random.choice(num_training, num_dev, replace=<span class="literal">False</span>)</span><br><span class="line">X_dev = X_train[mask]</span><br><span class="line">y_dev = y_train[mask]</span><br><span class="line"></span><br><span class="line"><span class="comment"># We use the first num_test points of the original test set as our</span></span><br><span class="line"><span class="comment"># test set.</span></span><br><span class="line">mask = range(num_test)</span><br><span class="line">X_test = X_test[mask]</span><br><span class="line">y_test = y_test[mask]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SVM</p>
+<ul>
+<li><p>naive<br>for those $j==y_i$, continue<br>for those $j!=y_i$,</p>
+<pre><code>`margin = scores[j] - correct_score + 1` 
+if $margin&gt;0$ then 
+    `loss += margin`
+    `dW[:, y[i]] -= X[i, :]`
+    `dW[:, j] += X[i, :]`</code></pre><ul>
+<li><p>remember to devide num_train to prevent exploding loss</p>
+</li>
+<li><p>regularization</p>
+</li>
+</ul>
+</li>
+<li><p>vectorized</p>
+<ul>
+<li><p>compute score<em>(N by C)</em> and score_correct<em>(N by 1)</em></p>
+</li>
+<li><p>compute margins</p>
+</li>
+<li><p>for loss</p>
+<ul>
+<li>把不到0的设成0            <code>margins[margins &lt;= 0] = 0</code></li>
+<li>把$j==y_i$的设成0        <code>margins[np.arange(num_train), y] = 0</code></li>
+<li>老样子</li>
+</ul>
+</li>
+<li><p>for dW</p>
+<ul>
+<li><p>把大于0的设成1            <code>margins[margins &gt; 0] = 1</code></p>
+</li>
+<li><p>计算每一行的总和加到$j==y_i$那里<br><code>row_sum = np.sum(margins, axis=1)</code><br><code>margins[np.arange(num_train), y] = -row_sum</code></p>
+</li>
+<li><p>$$<br>\frac{\partial L}{\partial W} =<br>\frac{\partial L}{\partial S} *<br>\frac{\partial S}{\partial W}<br>$$</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SGD</p>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>np.random.choice</em></strong></p>
+<p>随机抽样，抽出的是index</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment"># 参数意思分别 是从a中以概率P，随机选择3个, p没有指定的时候相当于是一致的分布</span></span><br><span class="line">&gt;a1 = np.random.choice(a=<span class="number">5</span>, size=<span class="number">3</span>, replace=<span class="literal">False</span>, p=<span class="literal">None</span>)</span><br><span class="line">&gt;print(a1)</span><br><span class="line">&gt;<span class="comment"># 非一致的分布，会以多少的概率提出来</span></span><br><span class="line">&gt;a2 = np.random.choice(a=<span class="number">5</span>, size=<span class="number">3</span>, replace=<span class="literal">False</span>, p=[<span class="number">0.2</span>, <span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.0</span>])</span><br><span class="line">&gt;print(a2)</span><br><span class="line">&gt;<span class="comment"># replacement 代表的意思是抽样之后还放不放回去，如果是False的话，那么出来的三个数都不一样，如果是True的话， 有可能会出现重复的，因为前面的抽的放回去了。</span></span><br><span class="line">&gt;<span class="comment">####深度学习中without replacement会快很多</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>np.max</em></strong>: 接受一个参数，返回对应的<strong>最大值</strong></p>
+<p><strong><em>np.argmax</em></strong>: 接受一个参数，返回<strong>最大值对应的索引</strong></p>
+<p><strong><em>np.maximize</em></strong>: 接受两个参数，<strong>对应数学中的max操作</strong></p>
+</blockquote>
+<ul>
+<li><p>Cross Validation choose hyperparameters</p>
+<p>for learning_rate</p>
+<pre><code>for regularization_strength
+    初始化新的svm分类器        `svm = LinearSVM()`
+    训练并得到loss_hist        `loss_hist = svm.train(X_train, y_train, learning_rate=lr,    reg=rs, num_iters=1500, verbose=True)`
+    预测分类        ` y_train_pred = svm.predict(X_train)`
+    得到train_accuracy和vali_accuracy    `train_acc = np.mean(y_train == y_train_pred)`
+    记录历史        `results[(lr, rs)] = (train_acc, val_acc)`
+    和最大值比较</code></pre><blockquote>
+<p><strong><em>np.mean</em></strong></p>
+<p>axis 不设置值，对 m*n 个数求均值，返回一个实数</p>
+<p>axis = 0：压缩行，对各列求均值，返回 1* n 矩阵</p>
+<p>axis =1 ：压缩列，对各行求均值，返回 m *1 矩阵</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>Softmax</p>
+<ul>
+<li><p>get_CIFAR10_data</p>
+<ul>
+<li>subsample: mask =&gt; val, train, test, dev</li>
+<li>reshape: into rows</li>
+<li>normalize: subtract the mean image</li>
+<li>add bias and transform into columns</li>
+</ul>
+</li>
+<li><p>naive<br>$L_{i} = -\log P_{y_{i}} = -\log\left(\frac{e^{f_{y_{i}}}}{\sum_{j}e^{f_{j}}}\right) = -f_{y_{i}}+\log\sum_{j}e^{f_{j}}$</p>
+<p>$L = \frac{1}{N}\sum_{i}L_{i}+\lambda R(W)$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_class = W.shape[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_train):</span><br><span class="line">        score = X[i].dot(W)</span><br><span class="line">        score -= np.max(score)      <span class="comment"># prevent numerical instability</span></span><br><span class="line">        correct_class_score = score[y[i]]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># loss</span></span><br><span class="line">        loss += np.log(np.sum(np.exp(score))) - correct_class_score</span><br><span class="line"></span><br><span class="line">        <span class="comment"># dW</span></span><br><span class="line">        dW[:, y[i]] -= X[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_class):</span><br><span class="line">            dW[:, j] = (np.exp(score[j]) / np.sum(np.exp(score))) * X[i]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># regularization</span></span><br><span class="line">        loss = loss / num_train + <span class="number">0.5</span> * reg * sum(W*W)</span><br><span class="line">        dW = dW / num_class + reg * W</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="https://upload-images.jianshu.io/upload_images/2233157-b77105789e36c847.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">num_train = X.shape[0]</span><br><span class="line">num_class = W.shape[1]</span><br><span class="line">for i in xrange(num_train):</span><br><span class="line">    score = X[i].dot(W)</span><br><span class="line">    score -= np.max(score)      # prevent numerical instability</span><br><span class="line">    correct_class_score = score[y[i]]</span><br><span class="line"></span><br><span class="line">    # loss</span><br><span class="line">    loss += np.log(np.sum(np.exp(score))) - correct_class_score</span><br><span class="line"></span><br><span class="line">    # dW</span><br><span class="line">    dW[:, y[i]] -= X[i]</span><br><span class="line">    for j in xrange(num_class):</span><br><span class="line">        dW[:, j] += (np.exp(score[j]) / np.sum(np.exp(score))) * X[i]</span><br><span class="line"></span><br><span class="line">    # regularization</span><br><span class="line">    loss = loss / num_train + 0.5 * reg * np.sum(W*W)</span><br><span class="line">    dW = dW / num_train + reg * W</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/cs231/" rel="tag"># cs231</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/06/learning/cs231/assignment2/" rel="prev" title="Assignment 2">
+      <i class="fa fa-chevron-left"></i> Assignment 2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/06/lab/compress/adversarial/" rel="next" title="比较 对抗样本 在 压缩模型 上的可迁移性">
+      比较 对抗样本 在 压缩模型 上的可迁移性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#笔记"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cs231-assignments"><span class="nav-number">2.</span> <span class="nav-text">cs231 assignments</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#assignment-1"><span class="nav-number">2.1.</span> <span class="nav-text">assignment 1</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#knn"><span class="nav-number">2.1.1.</span> <span class="nav-text">knn</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KK"
+      src="/images/myhead.png">
+  <p class="site-author-name" itemprop="name">KK</p>
+  <div class="site-description" itemprop="description">第一个博客，想着记录一下论文的阅读体会，不然每次读完了就忘了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KK</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
